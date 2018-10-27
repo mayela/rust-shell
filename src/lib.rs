@@ -2,6 +2,11 @@ use std::io::{self, Write};
 use std::process::{Command, Stdio};
 use std::str::Split;
 
+pub fn print_shell_prompt() {
+    print!("-> ");
+    io::stdout().flush().unwrap();
+}
+
 pub fn read_commands() -> String {
     let mut buffer = String::new();
     io::stdin()
@@ -10,14 +15,12 @@ pub fn read_commands() -> String {
     buffer
 }
 
-pub fn parse_command(result: &str) -> Vec<&str> {
-    let parsed_result: Vec<&str> = result.split_whitespace().collect();
-    parsed_result
+pub fn parse_commands(result: &String) -> Split<&str> {
+    result.split(";")
 }
 
-pub fn parse_commands(result: &String) -> Split<&str> {
-    let parsed_result = result.split(";");
-    parsed_result
+pub fn parse_command(result: &str) -> Vec<&str> {
+    result.split_whitespace().collect()
 }
 
 pub fn execute_commands(commands: Split<&str>) {
@@ -29,9 +32,4 @@ pub fn execute_commands(commands: Split<&str>) {
             .output()
             .expect("failed");
     }
-}
-
-pub fn print_shell_prompt() {
-    print!("-> ");
-    io::stdout().flush().unwrap();
 }
