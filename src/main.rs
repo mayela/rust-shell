@@ -1,12 +1,12 @@
 use std::io::{self, Write};
-use rshell::{read_command, execute_command, parse_command};
+use rshell;
 
 fn main(){
     loop {
         print!("-> ");
         io::stdout().flush().unwrap();
-        let command = read_command();
-        let parsed_result = parse_command(&command);
-        execute_command(&parsed_result);
+        let commands = rshell::read_commands();
+        let parsed_commands = rshell::parse_commands(&commands);
+        rshell::execute_commands(parsed_commands);
     }
 }
