@@ -1,18 +1,17 @@
+use std::io::{self, Write};
 use std::process::{Command, Stdio};
 use std::str::Split;
-use std::io::{self, Write};
-
 
 pub fn read_commands() -> String {
     let mut buffer = String::new();
-    io::stdin().read_line(&mut buffer)
+    io::stdin()
+        .read_line(&mut buffer)
         .expect("Failed to read line");
     buffer
 }
 
 pub fn parse_command(result: &str) -> Vec<&str> {
-    let parsed_result: Vec<&str> = result.split_whitespace()
-                                         .collect();
+    let parsed_result: Vec<&str> = result.split_whitespace().collect();
     parsed_result
 }
 
@@ -36,4 +35,3 @@ pub fn print_shell_prompt() {
     print!("-> ");
     io::stdout().flush().unwrap();
 }
-

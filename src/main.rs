@@ -1,6 +1,6 @@
 use rshell;
 
-fn main(){
+fn main() {
     loop {
         rshell::print_shell_prompt();
         let commands = rshell::read_commands();
