@@ -1,6 +1,6 @@
-use std::io;
 use std::process::{Command, Stdio};
 use std::str::Split;
+use std::io::{self, Write};
 
 
 pub fn read_commands() -> String {
@@ -30,5 +30,10 @@ pub fn execute_commands(commands: Split<&str>) {
             .output()
             .expect("failed");
     }
+}
+
+pub fn print_shell_prompt() {
+    print!("-> ");
+    io::stdout().flush().unwrap();
 }
 
